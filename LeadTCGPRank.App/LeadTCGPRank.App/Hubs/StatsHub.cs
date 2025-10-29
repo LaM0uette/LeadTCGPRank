@@ -85,24 +85,21 @@ public class StatsHub : Hub
     }
 
     
-    public async Task Win()
+    public async Task WinAsync()
     {
-        int current = await _statsService.GetWinsAsync();
-        await _statsService.SetWinsAsync(current + 1);
+        await _statsService.WinAsync();
         await BroadcastAsync();
     }
 
-    public async Task Loose()
+    public async Task LooseAsync()
     {
-        int current = await _statsService.GetLoosesAsync();
-        await _statsService.SetLoosesAsync(current + 1);
+        await _statsService.LooseAsync();
         await BroadcastAsync();
     }
 
-    public async Task Tie()
+    public async Task TieAsync()
     {
-        int current = await _statsService.GetTiesAsync();
-        await _statsService.SetTiesAsync(current + 1);
+        await _statsService.TieAsync();
         await BroadcastAsync();
     }
 

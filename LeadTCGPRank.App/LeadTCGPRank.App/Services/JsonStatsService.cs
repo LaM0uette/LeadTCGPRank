@@ -128,7 +128,29 @@ public class JsonStatsService : IStatsService
         
         await SetAsync(s, cancellationToken);
     }
+    
+    
+    public async Task<Stats> WinAsync(CancellationToken cancellationToken = default)
+    {
+        int current = await GetWinsAsync(cancellationToken);
+        await SetWinsAsync(current + 1, cancellationToken);
+        return await GetAsync(cancellationToken);
+    }
 
+    public async Task<Stats> LooseAsync(CancellationToken cancellationToken = default)
+    {
+        int current = await GetLoosesAsync(cancellationToken);
+        await SetLoosesAsync(current + 1, cancellationToken);
+        return await GetAsync(cancellationToken);
+    }
+
+    public async Task<Stats> TieAsync(CancellationToken cancellationToken = default)
+    {
+        int current = await GetTiesAsync(cancellationToken);
+        await SetTiesAsync(current + 1, cancellationToken);
+        return await GetAsync(cancellationToken);
+    }
+    
     
     private async Task WriteAsync(Stats stats, CancellationToken cancellationToken)
     {

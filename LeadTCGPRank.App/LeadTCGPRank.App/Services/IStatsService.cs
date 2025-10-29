@@ -21,4 +21,9 @@ public interface IStatsService
     
     Task<int> GetWinStreaksAsync(CancellationToken cancellationToken = default);
     Task SetWinStreaksAsync(int value, CancellationToken cancellationToken = default);
+
+    // Shared increment operations used by both Hub and API
+    Task<Stats> WinAsync(CancellationToken cancellationToken = default);
+    Task<Stats> LooseAsync(CancellationToken cancellationToken = default);
+    Task<Stats> TieAsync(CancellationToken cancellationToken = default);
 }

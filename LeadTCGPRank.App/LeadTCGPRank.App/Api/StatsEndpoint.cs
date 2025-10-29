@@ -20,27 +20,21 @@ public static class StatsEndpoint
 
     private static async Task<IResult> WinsAsync(IStatsService statsService, IHubContext<StatsHub> hub)
     {
-        int current = await statsService.GetWinsAsync();
-        await statsService.SetWinsAsync(current + 1);
-        Stats stats = await statsService.GetAsync();
+        Stats stats = await statsService.WinAsync();
         await hub.Clients.All.SendAsync("StatsUpdated", stats);
         return Results.Ok(stats);
     }
 
     private static async Task<IResult> LoosesAsync(IStatsService statsService, IHubContext<StatsHub> hub)
     {
-        int current = await statsService.GetLoosesAsync();
-        await statsService.SetLoosesAsync(current + 1);
-        Stats stats = await statsService.GetAsync();
+        Stats stats = await statsService.LooseAsync();
         await hub.Clients.All.SendAsync("StatsUpdated", stats);
         return Results.Ok(stats);
     }
 
     private static async Task<IResult> TiesAsync(IStatsService statsService, IHubContext<StatsHub> hub)
     {
-        int current = await statsService.GetTiesAsync();
-        await statsService.SetTiesAsync(current + 1);
-        Stats stats = await statsService.GetAsync();
+        Stats stats = await statsService.TieAsync();
         await hub.Clients.All.SendAsync("StatsUpdated", stats);
         return Results.Ok(stats);
     }
