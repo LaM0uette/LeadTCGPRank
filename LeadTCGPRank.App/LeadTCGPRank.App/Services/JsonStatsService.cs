@@ -3,14 +3,14 @@ using LeadTCGPRank.App.Models;
 
 namespace LeadTCGPRank.App.Services;
 
-public class JsonStatsRepository : IStatsRepository
+public class JsonStatsService : IStatsService
 {
     #region Statements
 
     private readonly string _filePath;
     private readonly SemaphoreSlim _lock = new(1, 1);
 
-    public JsonStatsRepository(IWebHostEnvironment env)
+    public JsonStatsService(IWebHostEnvironment env)
     {
         string dataDir = Path.Combine(env.ContentRootPath, "Data");
         Directory.CreateDirectory(dataDir);

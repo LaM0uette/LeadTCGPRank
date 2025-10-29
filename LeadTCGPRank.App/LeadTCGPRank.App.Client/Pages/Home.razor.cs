@@ -15,13 +15,13 @@ public class HomeBase : ComponentBase, IDisposable
     protected  int Points;
     protected  int WinStreaks;
     
-    [Inject] private StatsHubClient _hub { get; set; } = null!;
+    [Inject] private IStatsHubClient _statsHubClient { get; set; } = null!;
 
     protected override async Task OnInitializedAsync()
     {
-        _hub.StatsUpdated += OnStatsUpdated;
-        await _hub.EnsureConnectedAsync();
-        Stats s = await _hub.GetAll();
+        _statsHubClient.StatsUpdated += OnStatsUpdated;
+        await _statsHubClient.EnsureConnectedAsync();
+        Stats s = await _statsHubClient.GetAll();
         ApplyStats(s);
     }
 
@@ -31,27 +31,27 @@ public class HomeBase : ComponentBase, IDisposable
 
     protected async Task SetWins(int value)
     {
-        await _hub.SetWins(value);
+        await _statsHubClient.SetWins(value);
     }
 
     protected async Task SetLooses(int value)
     {
-        await _hub.SetLooses(value);
+        await _statsHubClient.SetLooses(value);
     }
 
     protected async Task SetTies(int value)
     {
-        await _hub.SetTies(value);
+        await _statsHubClient.SetTies(value);
     }
 
     protected async Task SetPoints(int value)
     {
-        await _hub.SetPoints(value);
+        await _statsHubClient.SetPoints(value);
     }
 
     protected async Task SetWinStreaks(int value)
     {
-        await _hub.SetWinStreaks(value);
+        await _statsHubClient.SetWinStreaks(value);
     }
     
     
@@ -77,7 +77,7 @@ public class HomeBase : ComponentBase, IDisposable
 
     public void Dispose()
     {
-        _hub.StatsUpdated -= OnStatsUpdated;
+        _statsHubClient.StatsUpdated -= OnStatsUpdated;
         GC.SuppressFinalize(this);
     }
 

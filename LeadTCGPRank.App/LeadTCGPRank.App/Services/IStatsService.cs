@@ -2,7 +2,7 @@ using LeadTCGPRank.App.Models;
 
 namespace LeadTCGPRank.App.Services;
 
-public interface IStatsRepository
+public interface IStatsService
 {
     Task<Stats> GetAsync(CancellationToken cancellationToken = default);
     Task SetAsync(Stats stats, CancellationToken cancellationToken = default);

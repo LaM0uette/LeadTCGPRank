@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 
 namespace LeadTCGPRank.App.Client.Services;
 
-public class StatsHubClient : IAsyncDisposable
+public class StatsHubClient : IStatsHubClient
 {
     #region Statements
 

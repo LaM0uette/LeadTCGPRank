@@ -8,11 +8,11 @@ public class StatsHub : Hub
 {
     #region Statements
 
-    private readonly IStatsRepository _repo;
+    private readonly IStatsService _statsService;
 
-    public StatsHub(IStatsRepository repo)
+    public StatsHub(IStatsService statsService)
     {
-        _repo = repo;
+        _statsService = statsService;
     }
 
     #endregion
@@ -21,73 +21,73 @@ public class StatsHub : Hub
 
     public async Task<Stats> GetAll()
     {
-        return await _repo.GetAsync();
+        return await _statsService.GetAsync();
     }
 
     
     public async Task<int> GetWins()
     {
-        return await _repo.GetWinsAsync();
+        return await _statsService.GetWinsAsync();
     }
 
     public async Task SetWins(int value)
     {
-        await _repo.SetWinsAsync(value);
+        await _statsService.SetWinsAsync(value);
         await BroadcastAsync();
     }
 
     
     public async Task<int> GetLooses()
     {
-        return await _repo.GetLoosesAsync();
+        return await _statsService.GetLoosesAsync();
     }
 
     public async Task SetLooses(int value)
     {
-        await _repo.SetLoosesAsync(value);
+        await _statsService.SetLoosesAsync(value);
         await BroadcastAsync();
     }
 
     
     public async Task<int> GetTies()
     {
-        return await _repo.GetTiesAsync();
+        return await _statsService.GetTiesAsync();
     }
 
     public async Task SetTies(int value)
     {
-        await _repo.SetTiesAsync(value);
+        await _statsService.SetTiesAsync(value);
         await BroadcastAsync();
     }
 
     
     public async Task<int> GetPoints()
     {
-        return await _repo.GetPointsAsync();
+        return await _statsService.GetPointsAsync();
     }
 
     public async Task SetPoints(int value)
     {
-        await _repo.SetPointsAsync(value);
+        await _statsService.SetPointsAsync(value);
         await BroadcastAsync();
     }
 
     
     public async Task<int> GetWinStreaks()
     {
-        return await _repo.GetWinStreaksAsync();
+        return await _statsService.GetWinStreaksAsync();
     }
 
     public async Task SetWinStreaks(int value)
     {
-        await _repo.SetWinStreaksAsync(value);
+        await _statsService.SetWinStreaksAsync(value);
         await BroadcastAsync();
     }
 
 
     private async Task BroadcastAsync()
     {
-        Stats stats = await _repo.GetAsync();
+        Stats stats = await _statsService.GetAsync();
         await Clients.All.SendAsync("StatsUpdated", stats);
     }
 

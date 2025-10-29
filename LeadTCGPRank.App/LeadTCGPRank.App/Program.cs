@@ -2,6 +2,7 @@ using LeadTCGPRank.App.Client.Services;
 using LeadTCGPRank.App.Components;
 using LeadTCGPRank.App.Hubs;
 using LeadTCGPRank.App.Services;
+using LeadTCGPRank.App.Services.FakeServices;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +10,10 @@ builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
 builder.Services.AddSignalR();
-builder.Services.AddScoped<StatsHubClient>();
-builder.Services.AddSingleton<IStatsRepository, JsonStatsRepository>();
+
+builder.Services.AddScoped<IStatsService, JsonStatsService>();
+
+builder.Services.AddScoped<IStatsHubClient, FakeStatsHubClient>();
 
 WebApplication app = builder.Build();
 
