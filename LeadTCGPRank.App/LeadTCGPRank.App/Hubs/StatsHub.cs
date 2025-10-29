@@ -9,10 +9,12 @@ public class StatsHub : Hub
     #region Statements
 
     private readonly IStatsService _statsService;
+    private readonly IRankService _rankService;
 
-    public StatsHub(IStatsService statsService)
+    public StatsHub(IStatsService statsService, IRankService rankService)
     {
         _statsService = statsService;
+        _rankService = rankService;
     }
 
     #endregion
@@ -21,19 +23,19 @@ public class StatsHub : Hub
     
     public async Task WinAsync()
     {
-        await _statsService.WinAsync();
+        await _rankService.WinAsync();
         await BroadcastAsync();
     }
 
     public async Task LooseAsync()
     {
-        await _statsService.LooseAsync();
+        await _rankService.LooseAsync();
         await BroadcastAsync();
     }
 
     public async Task TieAsync()
     {
-        await _statsService.TieAsync();
+        await _rankService.TieAsync();
         await BroadcastAsync();
     }
     

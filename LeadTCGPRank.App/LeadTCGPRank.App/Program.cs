@@ -13,6 +13,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddSignalR();
 
 builder.Services.AddScoped<IStatsService, JsonStatsService>();
+builder.Services.AddScoped<IRankService, RankService>();
 
 builder.Services.AddScoped<IStatsHubClient, FakeStatsHubClient>();
 

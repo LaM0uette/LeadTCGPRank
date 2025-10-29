@@ -21,28 +21,6 @@ public class JsonStatsService : IStatsService
 
     #region IStatsRepository
     
-    public async Task<Stats> WinAsync(CancellationToken cancellationToken = default)
-    {
-        int current = await GetWinsAsync(cancellationToken);
-        await SetWinsAsync(current + 1, cancellationToken);
-        return await GetAsync(cancellationToken);
-    }
-
-    public async Task<Stats> LooseAsync(CancellationToken cancellationToken = default)
-    {
-        int current = await GetLoosesAsync(cancellationToken);
-        await SetLoosesAsync(current + 1, cancellationToken);
-        return await GetAsync(cancellationToken);
-    }
-
-    public async Task<Stats> TieAsync(CancellationToken cancellationToken = default)
-    {
-        int current = await GetTiesAsync(cancellationToken);
-        await SetTiesAsync(current + 1, cancellationToken);
-        return await GetAsync(cancellationToken);
-    }
-    
-
     public async Task<Stats> GetAsync(CancellationToken cancellationToken = default)
     {
         await _lock.WaitAsync(cancellationToken);
