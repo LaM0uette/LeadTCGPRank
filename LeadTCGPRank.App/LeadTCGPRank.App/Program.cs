@@ -1,14 +1,19 @@
+using LeadTCGPRank.App.Client.Services;
 using LeadTCGPRank.App.Components;
+using LeadTCGPRank.App.Hubs;
+using LeadTCGPRank.App.Services;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
+builder.Services.AddSignalR();
+builder.Services.AddScoped<StatsHubClient>();
+builder.Services.AddSingleton<IStatsRepository, JsonStatsRepository>();
+
 WebApplication app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
@@ -21,12 +26,13 @@ else
 
 app.UseHttpsRedirection();
 
-
 app.UseAntiforgery();
 
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(LeadTCGPRank.App.Client._Imports).Assembly);
+
+app.MapHub<StatsHub>("/hubs/stats");
 
 app.Run();

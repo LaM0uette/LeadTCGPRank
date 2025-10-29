@@ -1,7 +1,40 @@
 ﻿@page "/"
+@inherits HomeBase
+
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Stats</h1>
 
-Welcome to your new app.
+@if (Stats is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div>
+        <div>Wins: @Stats.Wins</div>
+        <input type="number" @bind="Wins" />
+        <button @onclick="(() => SetWins(Wins))">Set</button>
+    </div>
+    <div>
+        <div>Looses: @Stats.Looses</div>
+        <input type="number" @bind="Looses" />
+        <button @onclick="(() => SetLooses(Looses))">Set</button>
+    </div>
+    <div>
+        <div>Ties: @Stats.Ties</div>
+        <input type="number" @bind="Ties" />
+        <button @onclick="(() => SetTies(Ties))">Set</button>
+    </div>
+    <div>
+        <div>Points: @Stats.Points</div>
+        <input type="number" @bind="Points" />
+        <button @onclick="(() => SetPoints(Points))">Set</button>
+    </div>
+    <div>
+        <div>Win Streaks: @Stats.WinStreaks</div>
+        <input type="number" @bind="WinStreaks" />
+        <button @onclick="(() => SetWinStreaks(WinStreaks))">Set</button>
+    </div>
+}
