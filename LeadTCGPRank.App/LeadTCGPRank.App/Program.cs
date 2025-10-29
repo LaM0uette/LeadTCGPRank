@@ -3,6 +3,7 @@ using LeadTCGPRank.App.Components;
 using LeadTCGPRank.App.Hubs;
 using LeadTCGPRank.App.Services;
 using LeadTCGPRank.App.Services.FakeServices;
+using LeadTCGPRank.App.Api;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -37,5 +38,6 @@ app.MapRazorComponents<App>()
     .AddAdditionalAssemblies(typeof(LeadTCGPRank.App.Client._Imports).Assembly);
 
 app.MapHub<StatsHub>("/hubs/stats");
+app.MapStatsEndpoint();
 
 app.Run();
