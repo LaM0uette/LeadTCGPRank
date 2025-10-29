@@ -18,10 +18,35 @@ public class StatsHub : Hub
     #endregion
 
     #region Methods
+    
+    public async Task WinAsync()
+    {
+        await _statsService.WinAsync();
+        await BroadcastAsync();
+    }
+
+    public async Task LooseAsync()
+    {
+        await _statsService.LooseAsync();
+        await BroadcastAsync();
+    }
+
+    public async Task TieAsync()
+    {
+        await _statsService.TieAsync();
+        await BroadcastAsync();
+    }
+    
 
     public async Task<Stats> GetAll()
     {
         return await _statsService.GetAsync();
+    }
+    
+    public async Task SetAll(Stats stats)
+    {
+        await _statsService.SetAsync(stats);
+        await BroadcastAsync();
     }
 
     
@@ -81,25 +106,6 @@ public class StatsHub : Hub
     public async Task SetWinStreaks(int value)
     {
         await _statsService.SetWinStreaksAsync(value);
-        await BroadcastAsync();
-    }
-
-    
-    public async Task WinAsync()
-    {
-        await _statsService.WinAsync();
-        await BroadcastAsync();
-    }
-
-    public async Task LooseAsync()
-    {
-        await _statsService.LooseAsync();
-        await BroadcastAsync();
-    }
-
-    public async Task TieAsync()
-    {
-        await _statsService.TieAsync();
         await BroadcastAsync();
     }
 

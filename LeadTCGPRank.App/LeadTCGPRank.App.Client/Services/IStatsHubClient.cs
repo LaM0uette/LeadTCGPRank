@@ -7,8 +7,13 @@ public interface IStatsHubClient : IAsyncDisposable
     event Action<Stats>? StatsUpdated;
 
     Task EnsureConnectedAsync();
+    
+    Task WinAsync();
+    Task LooseAsync();
+    Task TieAsync();
 
     Task<Stats> GetAll();
+    Task SetAll(Stats stats);
 
     Task<int> GetWins();
     Task SetWins(int value);

@@ -51,13 +51,14 @@ public class StatsHubClient : IStatsHubClient
             StatsUpdated?.Invoke(current);
         }
     }
+    
+    public async Task WinAsync() { await EnsureConnectedAsync(); await _connection!.InvokeAsync("WinAsync"); }
+    public async Task LooseAsync() { await EnsureConnectedAsync(); await _connection!.InvokeAsync("LooseAsync"); }
+    public async Task TieAsync() { await EnsureConnectedAsync(); await _connection!.InvokeAsync("TieAsync"); }
 
-    public async Task<Stats> GetAll()
-    {
-        await EnsureConnectedAsync();
-        return await _connection!.InvokeAsync<Stats>("GetAll");
-    }
-
+    public async Task<Stats> GetAll() { await EnsureConnectedAsync(); return await _connection!.InvokeAsync<Stats>("GetAll"); }
+    public async Task SetAll(Stats stats) { await EnsureConnectedAsync(); await _connection!.InvokeAsync("SetAll", stats); }
+    
     public async Task<int> GetWins() { await EnsureConnectedAsync(); return await _connection!.InvokeAsync<int>("GetWins"); }
     public async Task SetWins(int value) { await EnsureConnectedAsync(); await _connection!.InvokeAsync("SetWins", value); }
 

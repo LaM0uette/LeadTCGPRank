@@ -7,11 +7,14 @@ public class FakeStatsHubClient : IStatsHubClient
 {
     public event Action<Stats>? StatsUpdated;
     
-    // No-op connect: never throws, does nothing.
     public Task EnsureConnectedAsync() => Task.CompletedTask;
+    
+    public Task WinAsync() => Task.CompletedTask;
+    public Task LooseAsync() => Task.CompletedTask;
+    public Task TieAsync() => Task.CompletedTask;
 
-    // Return default/empty stats, do not emit events.
     public Task<Stats> GetAll() => Task.FromResult(new Stats());
+    public Task SetAll(Stats stats) => Task.CompletedTask;
 
     public Task<int> GetWins() => Task.FromResult(0);
     public Task SetWins(int value) => Task.CompletedTask;
