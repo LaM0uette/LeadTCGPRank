@@ -4,16 +4,11 @@ using Microsoft.AspNetCore.Components;
 
 namespace LeadTCGPRank.App.Client.Pages;
 
-public class HomeBase : ComponentBase, IDisposable
+public class RankViewBase : ComponentBase, IDisposable
 {
     #region Statements
 
-    protected  Stats? Stats;
-    protected  int Wins;
-    protected  int Looses;
-    protected  int Ties;
-    protected  int Points;
-    protected  int WinStreaks;
+    protected Stats? Stats;
     
     [Inject] private IStatsHubClient _statsHubClient { get; set; } = null!;
 
@@ -28,35 +23,9 @@ public class HomeBase : ComponentBase, IDisposable
     #endregion
 
     #region Methods
-
-    protected async Task SetWins(int value)
-    {
-        await _statsHubClient.SetWins(value);
-    }
-
-    protected async Task SetLooses(int value)
-    {
-        await _statsHubClient.SetLooses(value);
-    }
-
-    protected async Task SetTies(int value)
-    {
-        await _statsHubClient.SetTies(value);
-    }
-
-    protected async Task SetPoints(int value)
-    {
-        await _statsHubClient.SetPoints(value);
-    }
-
-    protected async Task SetWinStreaks(int value)
-    {
-        await _statsHubClient.SetWinStreaks(value);
-    }
-
+    
     protected string GetRankImage(Rank rank)
     {
-        // Map rank groups to a single icon for the family
         string file = rank switch
         {
             Rank.Beginner1 or Rank.Beginner2 or Rank.Beginner3 or Rank.Beginner4 => "beginner-ball.svg",
@@ -66,10 +35,11 @@ public class HomeBase : ComponentBase, IDisposable
             Rank.MasterBall => "master-ball.svg",
             _ => "beginner-ball.svg"
         };
+        
         return $"/img/{file}";
     }
     
-    
+
     private void OnStatsUpdated(Stats s)
     {
         ApplyStats(s);
@@ -79,15 +49,10 @@ public class HomeBase : ComponentBase, IDisposable
     private void ApplyStats(Stats s)
     {
         Stats = s;
-        Wins = s.Wins;
-        Looses = s.Looses;
-        Ties = s.Ties;
-        Points = s.Points;
-        WinStreaks = s.WinStreaks;
     }
 
     #endregion
-
+    
     #region IDisposable
 
     public void Dispose()

@@ -1,0 +1,19 @@
+﻿@page "/rank"
+@inherits RankViewBase
+
+
+@if (Stats is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="current-rank">
+        <img src="@GetRankImage(Stats.Rank)" alt="@Stats.RankLabel" class="rank-icon"/>
+        <span class="rank-name">@Stats.RankLabel</span>
+    </div>
+    
+    <div>
+        <div>Points: @Stats.Points</div>
+    </div>
+}
