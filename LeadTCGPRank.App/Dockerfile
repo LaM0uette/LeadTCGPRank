@@ -3,7 +3,7 @@ WORKDIR /src
 
 COPY LeadTCGPRank.sln ./
 COPY LeadTCGPRank.App/LeadTCGPRank.App.csproj LeadTCGPRank.App/
-COPY LeadTCGPRank.App.Client/LeadTCGPRank.App.Client.csproj LeadTCGPRank.App.Client/
+COPY LeadTCGPRank.App/LeadTCGPRank.App.Client/LeadTCGPRank.App.Client.csproj LeadTCGPRank.App/LeadTCGPRank.App.Client/
 RUN dotnet restore
 
 COPY . .
