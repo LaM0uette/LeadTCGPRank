@@ -8,12 +8,12 @@ public class HomeBase : ComponentBase, IDisposable
 {
     #region Statements
 
-    protected  Stats? Stats;
-    protected  int Wins;
-    protected  int Looses;
-    protected  int Ties;
-    protected  int Points;
-    protected  int WinStreaks;
+    protected Stats? Stats;
+    protected int Wins;
+    protected int Looses;
+    protected int Ties;
+    protected int Points;
+    protected int WinStreaks;
     
     [Inject] private IStatsHubClient _statsHubClient { get; set; } = null!;
 
@@ -28,6 +28,22 @@ public class HomeBase : ComponentBase, IDisposable
     #endregion
 
     #region Methods
+
+    protected async Task Win()
+    {
+        await _statsHubClient.WinAsync();
+    }
+    
+    protected async Task Loose()
+    {
+        await _statsHubClient.LooseAsync();
+    }
+    
+    protected async Task Tie()
+    {
+        await _statsHubClient.TieAsync();
+    }
+    
 
     protected async Task SetWins(int value)
     {
@@ -52,6 +68,15 @@ public class HomeBase : ComponentBase, IDisposable
     protected async Task SetWinStreaks(int value)
     {
         await _statsHubClient.SetWinStreaks(value);
+    }
+    
+    protected async Task SetAll(int wins, int looses, int ties, int points, int winStreaks)
+    {
+        await _statsHubClient.SetWins(wins);
+        await _statsHubClient.SetLooses(looses);
+        await _statsHubClient.SetTies(ties);
+        await _statsHubClient.SetPoints(points);
+        await _statsHubClient.SetWinStreaks(winStreaks);
     }
 
     protected string GetRankImage(Rank rank)

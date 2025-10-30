@@ -42,4 +42,9 @@ else
         <input type="number" @bind="WinStreaks" />
         <button @onclick="(() => SetWinStreaks(WinStreaks))">Set</button>
     </div>
+    
+    <button @onclick="(() => SetAll(Wins, Looses, Ties, Points, WinStreaks))">Set all</button>
+    <button @onclick="Win">Win</button>
+    <button @onclick="Loose">Loose</button>
+    <button @onclick="Tie">Tie</button>
 }
