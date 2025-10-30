@@ -2,9 +2,8 @@ namespace LeadTCGPRank.App.Models;
 
 public static class Rankings
 {
-    // Thresholds and labels as specified. Points are the minimum points for the rank.
-    private static readonly List<(int Threshold, Rank Rank, string Label)> _map = new()
-    {
+    private static readonly List<(int Threshold, Rank Rank, string Label)> _map =
+    [
         (0, Rank.Beginner1, "Débutant 1"),
         (20, Rank.Beginner2, "Débutant 2"),
         (50, Rank.Beginner3, "Débutant 3"),
@@ -22,12 +21,13 @@ public static class Rankings
         (1010, Rank.UltraBall3, "Hyper Ball 3"),
         (1225, Rank.UltraBall4, "Hyper Ball 4"),
         (1450, Rank.MasterBall, "Master Ball")
-    };
+    ];
 
     public static Rank GetRankForPoints(int points)
     {
         Rank current = _map[0].Rank;
-        foreach (var entry in _map)
+        
+        foreach ((int Threshold, Rank Rank, string Label) entry in _map)
         {
             if (points >= entry.Threshold)
             {
@@ -43,22 +43,27 @@ public static class Rankings
 
     public static string GetLabel(Rank rank)
     {
-        foreach (var entry in _map)
+        foreach ((int Threshold, Rank Rank, string Label) entry in _map)
         {
             if (entry.Rank == rank)
+            {
                 return entry.Label;
+            }
         }
+        
         return rank.ToString();
     }
 
     public static int GetThreshold(Rank rank)
     {
-        foreach (var entry in _map)
+        foreach ((int Threshold, Rank Rank, string Label) entry in _map)
         {
             if (entry.Rank == rank)
+            {
                 return entry.Threshold;
+            }
         }
-        // If not found (should not happen), return 0 as safe default
+        
         return 0;
     }
 }

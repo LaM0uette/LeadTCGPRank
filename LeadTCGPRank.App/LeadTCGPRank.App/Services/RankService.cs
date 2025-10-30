@@ -57,6 +57,7 @@ public class RankService : IRankService
         // Update Losses
         int currentLosses = await _statsService.GetLoosesAsync(cancellationToken);
         currentLosses++;
+        
         await _statsService.SetLoosesAsync(currentLosses, cancellationToken);
         
         // Reset Win Streaks
@@ -65,21 +66,23 @@ public class RankService : IRankService
         // Points and rank logic
         int currentPoints = await _statsService.GetPointsAsync(cancellationToken);
         Rank currentRank = Rankings.GetRankForPoints(currentPoints);
+        
         int penalty = currentRank switch
         {
             Rank.MasterBall => 10,
             Rank.UltraBall1 or Rank.UltraBall2 or Rank.UltraBall3 or Rank.UltraBall4 => 7,
-            Rank.PokeBall1 or Rank.PokeBall2 or Rank.PokeBall3 or Rank.PokeBall4 or
-            Rank.GreatBall1 or Rank.GreatBall2 or Rank.GreatBall3 or Rank.GreatBall4 => 5,
+            Rank.PokeBall1 or Rank.PokeBall2 or Rank.PokeBall3 or Rank.PokeBall4 or Rank.GreatBall1 or Rank.GreatBall2 or Rank.GreatBall3 or Rank.GreatBall4 => 5,
             _ => 0
         };
+        
         int newPoints = Math.Max(0, currentPoints - penalty);
         
         // Cap to avoid rank loss for protected ranks
-        bool isProtected = currentRank <= Rank.GreatBall1 || currentRank == Rank.UltraBall1 || currentRank == Rank.MasterBall;
+        bool isProtected = currentRank is <= Rank.GreatBall1 or Rank.UltraBall1 or Rank.MasterBall;
         if (isProtected)
         {
             int threshold = Rankings.GetThreshold(currentRank);
+            
             if (newPoints < threshold)
             {
                 newPoints = threshold;

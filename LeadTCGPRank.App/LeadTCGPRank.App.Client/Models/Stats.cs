@@ -8,7 +8,6 @@ public class Stats
     public int Points { get; set; }
     public int WinStreaks { get; set; }
 
-    // Provided by server; deserialized into these properties
     public Rank Rank { get; set; }
     public string RankLabel { get; set; } = string.Empty;
 }

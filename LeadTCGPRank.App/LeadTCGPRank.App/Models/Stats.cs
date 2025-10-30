@@ -7,8 +7,7 @@ public class Stats
     public int Ties { get; set; }
     public int Points { get; set; }
     public int WinStreaks { get; set; }
-
-    // Computed rank information based on points
+    
     public Rank Rank => Rankings.GetRankForPoints(Points);
     public string RankLabel => Rankings.GetLabel(Rank);
 }
