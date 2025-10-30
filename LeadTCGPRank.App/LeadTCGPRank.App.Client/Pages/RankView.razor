@@ -21,5 +21,27 @@ else
     
         <div class="rank-container__points">@Stats.Points</div>
         
+        <div class="rank-stats">
+            <div class="rank-stat rank-stat--large">
+                <p class="rank-stat__value">@Stats.WinStreaks.ToString("N0")</p>
+                <p class="rank-stat__txt">Série de victoires</p>
+            </div>
+            
+            <div class="rank-stat">
+                <p class="rank-stat__value">@Stats.Wins.ToString("N0")</p>
+                <p class="rank-stat__txt">Victoires</p>
+            </div>
+
+            <div class="rank-stat">
+                <p class="rank-stat__value">@Stats.Looses.ToString("N0")</p>
+                <p class="rank-stat__txt">Défaites</p>
+            </div>
+
+            <div class="rank-stat">
+                <p class="rank-stat__value">@Stats.Ties.ToString("N0")</p>
+                <p class="rank-stat__txt">Matchs nuls</p>
+            </div>
+        </div>
+        
     </div>
 }
