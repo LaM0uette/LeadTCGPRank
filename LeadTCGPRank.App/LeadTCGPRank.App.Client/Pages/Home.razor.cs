@@ -53,7 +53,21 @@ public class HomeBase : ComponentBase, IDisposable
     {
         await _statsHubClient.SetWinStreaks(value);
     }
-    
+
+    protected string GetRankImage(Rank rank)
+    {
+        // Map rank groups to a single icon for the family
+        string file = rank switch
+        {
+            Rank.Beginner1 or Rank.Beginner2 or Rank.Beginner3 or Rank.Beginner4 => "beginner-ball.svg",
+            Rank.PokeBall1 or Rank.PokeBall2 or Rank.PokeBall3 or Rank.PokeBall4 => "poke-ball.svg",
+            Rank.GreatBall1 or Rank.GreatBall2 or Rank.GreatBall3 or Rank.GreatBall4 => "great-ball.svg",
+            Rank.UltraBall1 or Rank.UltraBall2 or Rank.UltraBall3 or Rank.UltraBall4 => "ultra-ball.svg",
+            Rank.MasterBall => "master-ball.svg",
+            _ => "beginner-ball.svg"
+        };
+        return $"/img/{file}";
+    }
     
     private void OnStatsUpdated(Stats s)
     {

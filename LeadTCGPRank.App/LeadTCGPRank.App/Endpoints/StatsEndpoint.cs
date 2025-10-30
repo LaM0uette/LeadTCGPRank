@@ -3,7 +3,7 @@ using LeadTCGPRank.App.Models;
 using LeadTCGPRank.App.Services;
 using Microsoft.AspNetCore.SignalR;
 
-namespace LeadTCGPRank.App.Api;
+namespace LeadTCGPRank.App.Endpoints;
 
 public static class StatsEndpoint
 {
@@ -11,9 +11,9 @@ public static class StatsEndpoint
     {
         RouteGroupBuilder group = app.MapGroup("/stats");
 
-        group.MapPost("/win", WinsAsync);
-        group.MapPost("/loose", LoosesAsync);
-        group.MapPost("/tie", TiesAsync);
+        group.MapGet("/win", WinsAsync);
+        group.MapGet("/loose", LoosesAsync);
+        group.MapGet("/tie", TiesAsync);
 
         return app;
     }

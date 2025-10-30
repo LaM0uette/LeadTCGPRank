@@ -3,7 +3,7 @@ using LeadTCGPRank.App.Components;
 using LeadTCGPRank.App.Hubs;
 using LeadTCGPRank.App.Services;
 using LeadTCGPRank.App.Services.FakeServices;
-using LeadTCGPRank.App.Api;
+using LeadTCGPRank.App.Endpoints;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
