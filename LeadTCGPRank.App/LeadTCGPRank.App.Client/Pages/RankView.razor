@@ -1,4 +1,5 @@
 ﻿@page "/rank"
+@using LeadTCGPRank.App.Client.Models
 @inherits RankViewBase
 
 
@@ -8,12 +9,17 @@
 }
 else
 {
-    <div class="current-rank">
-        <img src="@GetRankImage(Stats.Rank)" alt="@Stats.RankLabel" class="rank-icon"/>
-        <span class="rank-name">@Stats.RankLabel</span>
-    </div>
+    <div class="rank-container">
+        
+        <div class="rank">
+            <img class="rank__icon" src="@GetRankImage(Stats.Rank)" alt="@Stats.RankLabel"/>
+            @if (Stats.Rank < Rank.MasterBall)
+            {
+                <span class="rank__name">@Stats.RankLabel</span>
+            }
+        </div>
     
-    <div>
-        <div>Points: @Stats.Points</div>
+        <div class="rank-container__points">@Stats.Points</div>
+        
     </div>
 }

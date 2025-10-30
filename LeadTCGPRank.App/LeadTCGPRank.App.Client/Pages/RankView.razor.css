@@ -1,15 +1,55 @@
-﻿.current-rank {
-    display: inline-flex;
+﻿.rank-container {
+    width: 365px;
+    height: 1080px;
+    
+    font-family: var(--font-bold), sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
     align-items: center;
-    gap: 0.5rem;
-    margin: 0.5rem 0 1rem;
+    
+    background-color: #323039;
 }
 
-.rank-icon {
-    width: 40px;
-    height: 40px;
+    .rank-container__points {
+        width: 100%;
+
+        margin-top: 5rem;
+
+        font-family: var(--font-extra-bold), sans-serif;
+        font-size: 7rem;
+        color: var(--bg);
+
+        text-align: center;
+    }
+
+ 
+.rank {
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 2rem;
+
+    padding-top: 3rem;
+    box-sizing: border-box;
 }
 
-.rank-name {
-    font-weight: 600;
-}
+    .rank__icon {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .rank__name {
+        width: 100%;
+        
+        font-family: var(--font-extra-bold), sans-serif;
+        font-size: 2.6rem;
+        color: var(--bg);
+        
+        text-align: center;
+    }
+    
